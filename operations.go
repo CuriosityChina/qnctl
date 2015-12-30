@@ -42,7 +42,7 @@ func Operate(accessKey, secretKey string) {
 
 func Ls(path string) {
 	bucket, ctx := Bucket()
-	list, _, err := bucket.List(ctx, path, "", 100)
+	list, _, err := bucket.List(ctx, path, "", 10000)
 	if err == nil {
 		for i := range list {
 			PrintListItem(&list[i])
