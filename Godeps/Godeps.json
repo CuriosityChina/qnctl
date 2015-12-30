@@ -1,0 +1,65 @@
+{
+	"ImportPath": "github.com/wizawu/qnctl",
+	"GoVersion": "go1.4.2",
+	"Deps": [
+		{
+			"ImportPath": "golang.org/x/net/context",
+			"Rev": "7654728e381988afd88e58cabfd6363a5ea91810"
+		},
+		{
+			"ImportPath": "qiniupkg.com/api.v7/auth/qbox",
+			"Comment": "v7.0.3-6-g23259d1",
+			"Rev": "23259d163e33687d1ef5dfc7896add3bcb799776"
+		},
+		{
+			"ImportPath": "qiniupkg.com/api.v7/conf",
+			"Comment": "v7.0.3-6-g23259d1",
+			"Rev": "23259d163e33687d1ef5dfc7896add3bcb799776"
+		},
+		{
+			"ImportPath": "qiniupkg.com/api.v7/kodo",
+			"Comment": "v7.0.3-6-g23259d1",
+			"Rev": "23259d163e33687d1ef5dfc7896add3bcb799776"
+		},
+		{
+			"ImportPath": "qiniupkg.com/api.v7/kodocli",
+			"Comment": "v7.0.3-6-g23259d1",
+			"Rev": "23259d163e33687d1ef5dfc7896add3bcb799776"
+		},
+		{
+			"ImportPath": "qiniupkg.com/x/bytes.v7",
+			"Comment": "v7.0.8",
+			"Rev": "946c4a16076d6d98aeb78619e2bd4012357f7228"
+		},
+		{
+			"ImportPath": "qiniupkg.com/x/ctype.v7",
+			"Comment": "v7.0.8",
+			"Rev": "946c4a16076d6d98aeb78619e2bd4012357f7228"
+		},
+		{
+			"ImportPath": "qiniupkg.com/x/log.v7",
+			"Comment": "v7.0.8",
+			"Rev": "946c4a16076d6d98aeb78619e2bd4012357f7228"
+		},
+		{
+			"ImportPath": "qiniupkg.com/x/reqid.v7",
+			"Comment": "v7.0.8",
+			"Rev": "946c4a16076d6d98aeb78619e2bd4012357f7228"
+		},
+		{
+			"ImportPath": "qiniupkg.com/x/rpc.v7",
+			"Comment": "v7.0.8",
+			"Rev": "946c4a16076d6d98aeb78619e2bd4012357f7228"
+		},
+		{
+			"ImportPath": "qiniupkg.com/x/url.v7",
+			"Comment": "v7.0.8",
+			"Rev": "946c4a16076d6d98aeb78619e2bd4012357f7228"
+		},
+		{
+			"ImportPath": "qiniupkg.com/x/xlog.v7",
+			"Comment": "v7.0.8",
+			"Rev": "946c4a16076d6d98aeb78619e2bd4012357f7228"
+		}
+	]
+}
