@@ -3,4 +3,3 @@ go:
   - tip
 script:
   - make
-  - ./qnctl help

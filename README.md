@@ -1,5 +1,4 @@
-qnctl
-===
+# qnctl [![Travis][build-badge]][build]
 
 ### Build
 
