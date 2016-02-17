@@ -32,8 +32,8 @@ Or create a JSON file like
 ```shell
 $ cat config.json
 {
-    access_key: "abcd...",
-    secret_key: "dcba..."
+    "access_key": "abcd...",
+    "secret_key": "dcba..."
 }
 
 $ QINIU_BUCKET=test qnctl -c config.json ls images
