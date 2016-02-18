@@ -36,7 +36,7 @@ $ cat config.json
     "secret_key": "dcba..."
 }
 
-$ QINIU_BUCKET=test qnctl -c config.json ls images
+$ qnctl -c config.json -b test ls images
 ```
 
 #### add

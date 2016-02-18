@@ -3,3 +3,9 @@ go:
   - tip
 script:
   - make
+  - ./qnctl -b test add / main.go
+  - ./qnctl -b test add /help.go help.go
+  - ./qnctl -b test ls /
+  - ./qnctl -b test stat /main.go
+  - ./qnctl -b test rm /main.go
+  - ./qnctl -b test rm /help.go

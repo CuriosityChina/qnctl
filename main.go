@@ -2,11 +2,12 @@ package main
 
 import (
 	"encoding/json"
+	"flag"
 	"io/ioutil"
 	"os"
 )
 
-func readConf(path string) map[string]string {
+func readConfig(path string) map[string]string {
 	content, err := ioutil.ReadFile(path)
 	if err != nil {
 		println(err.Error())
@@ -21,20 +22,27 @@ func readConf(path string) map[string]string {
 	return result
 }
 
-func getAuth() (string, string) {
-	if len(os.Args) >= 3 && os.Args[1] == "-c" {
-		conf := readConf(os.Args[2])
-		return conf["access_key"], conf["secret_key"]
-	} else {
-		return os.Getenv("QINIU_AK"), os.Getenv("QINIU_SK")
-	}
-}
-
 func main() {
-	accessKey, secretKey := getAuth()
-	if accessKey == "" || secretKey == "" {
-		helpAndExit(1)
+	accessKey := os.Getenv("QINIU_AK")
+	secretKey := os.Getenv("QINIU_SK")
+	bucket := os.Getenv("QINIU_BUCKET")
+
+	bucketArg := flag.String("b", "", "")
+	configArg := flag.String("c", "", "")
+	flag.Parse()
+
+	if *bucketArg != "" {
+		bucket = *bucketArg
+	}
+	if *configArg != "" {
+		config := readConfig(*configArg)
+		accessKey = config["access_key"]
+		secretKey = config["secret_key"]
+	}
+
+	if accessKey == "" || secretKey == "" || bucket == "" || len(flag.Args()) == 0 {
+		HelpAndExit(1)
 	} else {
-		Operate(accessKey, secretKey)
+		Operate(accessKey, secretKey, bucket)
 	}
 }

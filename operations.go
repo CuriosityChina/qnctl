@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"golang.org/x/net/context"
 	"os"
@@ -11,32 +12,25 @@ import (
 )
 
 var client *kodo.Client
+var bucketName string
 
-func Operate(accessKey, secretKey string) {
+func Operate(accessKey, secretKey, bucket string) {
 	kodo.SetMac(accessKey, secretKey)
 	client = kodo.New(0, nil)
+	bucketName = bucket
 
-	var index = 0
-	var nargs = len(os.Args)
-	if nargs >= 4 && os.Args[1] == "-c" {
-		index = 3
-	} else if nargs >= 2 {
-		index = 1
+	args := flag.Args()
+	op := args[0]
+	if op == "ls" && len(args) == 2 {
+		Ls(args[1])
+	} else if op == "add" && len(args) == 3 {
+		Add(args[1], args[2])
+	} else if op == "rm" && len(args) == 2 {
+		Rm(args[1])
+	} else if op == "stat" && len(args) == 2 {
+		Stat(args[1])
 	} else {
-		helpAndExit(1)
-	}
-
-	var op = os.Args[index]
-	if op == "ls" && nargs == index+2 {
-		Ls(os.Args[index+1])
-	} else if op == "add" && nargs == index+3 {
-		Add(os.Args[index+1], os.Args[index+2])
-	} else if op == "stat" && nargs == index+2 {
-		Stat(os.Args[index+1])
-	} else if op == "rm" && nargs == index+2 {
-		Rm(os.Args[index+1])
-	} else {
-		helpAndExit(1)
+		HelpAndExit(1)
 	}
 }
 
@@ -112,9 +106,5 @@ func PrintListItem(i *kodo.ListItem) {
 }
 
 func Bucket() (kodo.Bucket, context.Context) {
-	name := os.Getenv("QINIU_BUCKET")
-	if name == "" {
-		helpAndExit(1)
-	}
-	return client.Bucket(name), context.Background()
+	return client.Bucket(bucketName), context.Background()
 }
