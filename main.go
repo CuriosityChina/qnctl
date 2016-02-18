@@ -40,7 +40,7 @@ func main() {
 		secretKey = config["secret_key"]
 	}
 
-	if accessKey == "" || secretKey == "" || bucket == "" {
+	if accessKey == "" || secretKey == "" || bucket == "" || len(flag.Args()) == 0 {
 		HelpAndExit(1)
 	} else {
 		Operate(accessKey, secretKey, bucket)

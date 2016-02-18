@@ -12,17 +12,15 @@ import (
 )
 
 var client *kodo.Client
+var bucketName string
 
 func Operate(accessKey, secretKey, bucket string) {
 	kodo.SetMac(accessKey, secretKey)
 	client = kodo.New(0, nil)
+	bucketName = bucket
+
 	args := flag.Args()
-
-	if len(args) == 0 {
-		HelpAndExit(1)
-	}
-
-	var op = args[0]
+	op := args[0]
 	if op == "ls" && len(args) == 2 {
 		Ls(args[1])
 	} else if op == "add" && len(args) == 3 {
@@ -108,9 +106,5 @@ func PrintListItem(i *kodo.ListItem) {
 }
 
 func Bucket() (kodo.Bucket, context.Context) {
-	name := os.Getenv("QINIU_BUCKET")
-	if name == "" {
-		HelpAndExit(1)
-	}
-	return client.Bucket(name), context.Background()
+	return client.Bucket(bucketName), context.Background()
 }

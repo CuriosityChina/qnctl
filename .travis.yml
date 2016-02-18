@@ -8,3 +8,4 @@ script:
   - ./qnctl -b test ls /
   - ./qnctl -b test stat /main.go
   - ./qnctl -b test rm /main.go
+  - ./qnctl -b test rm /help.go
