@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"golang.org/x/net/context"
+	"io"
 	"os"
 	"path/filepath"
 	"qiniupkg.com/api.v7/kodo"
@@ -36,11 +37,11 @@ func Operate(accessKey, secretKey, bucket string) {
 
 func Ls(path string) {
 	bucket, ctx := Bucket()
-	list, _, err := bucket.List(ctx, path, "", 100000)
+	list, _, _, err := bucket.List(ctx, path, "", "", 100000)
 	for i := range list {
 		PrintListItem(&list[i])
 	}
-	if err != nil {
+	if err != nil && err != io.EOF {
 		println(err.Error())
 	}
 }

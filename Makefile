@@ -2,7 +2,7 @@
 
 GOPATH=${PWD}/Godeps
 
-all:
+all: clean
 	ln -sf ${PWD}/vendor Godeps/src && go build
 
 install: all
