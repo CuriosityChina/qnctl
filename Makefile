@@ -1,12 +1,12 @@
 .PHONY: all clean install
 
-GOPATH=${PWD}/Godeps/_workspace
+GOPATH=${PWD}/Godeps
 
-all:
-	go build
+all: clean
+	ln -sf ${PWD}/vendor Godeps/src && go build
 
 install: all
 	sudo cp qnctl /usr/bin/
 
 clean:
-	rm -rf qnctl
+	rm -rf qnctl Godeps/src

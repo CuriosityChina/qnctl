@@ -1,65 +1,62 @@
 {
 	"ImportPath": "github.com/wizawu/qnctl",
-	"GoVersion": "go1.4.2",
+	"GoVersion": "go1.6",
 	"Deps": [
 		{
 			"ImportPath": "golang.org/x/net/context",
-			"Rev": "7654728e381988afd88e58cabfd6363a5ea91810"
+			"Rev": "4599ae7937fce9b670ce32b8ad32bbb7ae726b3e"
 		},
 		{
 			"ImportPath": "qiniupkg.com/api.v7/auth/qbox",
-			"Comment": "v7.0.3-6-g23259d1",
-			"Rev": "23259d163e33687d1ef5dfc7896add3bcb799776"
+			"Comment": "v7.0.5-1-gf956f45",
+			"Rev": "f956f458351353a3a75a3a519fed4e3069f14df0"
 		},
 		{
 			"ImportPath": "qiniupkg.com/api.v7/conf",
-			"Comment": "v7.0.3-6-g23259d1",
-			"Rev": "23259d163e33687d1ef5dfc7896add3bcb799776"
+			"Comment": "v7.0.5-1-gf956f45",
+			"Rev": "f956f458351353a3a75a3a519fed4e3069f14df0"
 		},
 		{
 			"ImportPath": "qiniupkg.com/api.v7/kodo",
-			"Comment": "v7.0.3-6-g23259d1",
-			"Rev": "23259d163e33687d1ef5dfc7896add3bcb799776"
+			"Comment": "v7.0.5-1-gf956f45",
+			"Rev": "f956f458351353a3a75a3a519fed4e3069f14df0"
 		},
 		{
 			"ImportPath": "qiniupkg.com/api.v7/kodocli",
-			"Comment": "v7.0.3-6-g23259d1",
-			"Rev": "23259d163e33687d1ef5dfc7896add3bcb799776"
+			"Comment": "v7.0.5-1-gf956f45",
+			"Rev": "f956f458351353a3a75a3a519fed4e3069f14df0"
 		},
 		{
 			"ImportPath": "qiniupkg.com/x/bytes.v7",
-			"Comment": "v7.0.8",
-			"Rev": "946c4a16076d6d98aeb78619e2bd4012357f7228"
+			"Rev": "f512abcf45ab4e2ba0fd4784c57b53d495997d66"
+		},
+		{
+			"ImportPath": "qiniupkg.com/x/bytes.v7/seekable",
+			"Rev": "f512abcf45ab4e2ba0fd4784c57b53d495997d66"
 		},
 		{
 			"ImportPath": "qiniupkg.com/x/ctype.v7",
-			"Comment": "v7.0.8",
-			"Rev": "946c4a16076d6d98aeb78619e2bd4012357f7228"
+			"Rev": "f512abcf45ab4e2ba0fd4784c57b53d495997d66"
 		},
 		{
 			"ImportPath": "qiniupkg.com/x/log.v7",
-			"Comment": "v7.0.8",
-			"Rev": "946c4a16076d6d98aeb78619e2bd4012357f7228"
+			"Rev": "f512abcf45ab4e2ba0fd4784c57b53d495997d66"
 		},
 		{
 			"ImportPath": "qiniupkg.com/x/reqid.v7",
-			"Comment": "v7.0.8",
-			"Rev": "946c4a16076d6d98aeb78619e2bd4012357f7228"
+			"Rev": "f512abcf45ab4e2ba0fd4784c57b53d495997d66"
 		},
 		{
 			"ImportPath": "qiniupkg.com/x/rpc.v7",
-			"Comment": "v7.0.8",
-			"Rev": "946c4a16076d6d98aeb78619e2bd4012357f7228"
+			"Rev": "f512abcf45ab4e2ba0fd4784c57b53d495997d66"
 		},
 		{
 			"ImportPath": "qiniupkg.com/x/url.v7",
-			"Comment": "v7.0.8",
-			"Rev": "946c4a16076d6d98aeb78619e2bd4012357f7228"
+			"Rev": "f512abcf45ab4e2ba0fd4784c57b53d495997d66"
 		},
 		{
 			"ImportPath": "qiniupkg.com/x/xlog.v7",
-			"Comment": "v7.0.8",
-			"Rev": "946c4a16076d6d98aeb78619e2bd4012357f7228"
+			"Rev": "f512abcf45ab4e2ba0fd4784c57b53d495997d66"
 		}
 	]
 }
