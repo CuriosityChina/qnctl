@@ -3,7 +3,8 @@ package main
 import "os"
 
 func HelpAndExit(code int) {
-	println(`
+	println(`Version: 1.0.0
+
 Usage:
     qnctl -c config.json -b <bucket> <operation> <args>
     # or
@@ -19,8 +20,9 @@ Config example:
 Operations:
     add     <key|path>  <file>
     rm      <key>
+    ls      <key|path>
     stat    <key>
-    ls      <path>
+    sync    <key|path>
 	`)
 
 	os.Exit(code)

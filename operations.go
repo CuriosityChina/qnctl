@@ -1,12 +1,17 @@
 package main
 
 import (
+	"bytes"
+	"encoding/json"
 	"flag"
 	"fmt"
 	"golang.org/x/net/context"
 	"io"
+	"io/ioutil"
+	"net/http"
 	"os"
 	"path/filepath"
+	"qiniupkg.com/api.v7/auth/qbox"
 	"qiniupkg.com/api.v7/kodo"
 	"strings"
 	"time"
@@ -14,11 +19,13 @@ import (
 
 var client *kodo.Client
 var bucketName string
+var mac *qbox.Mac
 
 func Operate(accessKey, secretKey, bucket string) {
+	bucketName = bucket
 	kodo.SetMac(accessKey, secretKey)
 	client = kodo.New(0, nil)
-	bucketName = bucket
+	mac = qbox.NewMac(accessKey, secretKey)
 
 	args := flag.Args()
 	op := args[0]
@@ -30,6 +37,8 @@ func Operate(accessKey, secretKey, bucket string) {
 		Rm(args[1])
 	} else if op == "stat" && len(args) == 2 {
 		Stat(args[1])
+	} else if op == "sync" && len(args) == 2 {
+		Sync(args[1])
 	} else {
 		HelpAndExit(1)
 	}
@@ -42,14 +51,14 @@ func Ls(path string) {
 		PrintListItem(&list[i])
 	}
 	if err != nil && err != io.EOF {
-		println(err.Error())
+		existWithError(err)
 	}
 }
 
 func Add(key, file string) {
 	paths, err := filepath.Glob(file)
 	if err != nil {
-		println(err.Error())
+		existWithError(err)
 	} else {
 		for i := range paths {
 			fileInfo, _ := os.Stat(paths[i])
@@ -68,7 +77,7 @@ func AddOne(key, file string) {
 	bucket, ctx := Bucket()
 	err := bucket.PutFile(ctx, nil, key, file, nil)
 	if err != nil {
-		println(err.Error())
+		existWithError(err)
 	} else {
 		Stat(key)
 	}
@@ -80,7 +89,7 @@ func Stat(key string) {
 	if err == nil {
 		PrintEntry(&entry, key)
 	} else {
-		println(err.Error())
+		existWithError(err)
 	}
 }
 
@@ -88,7 +97,41 @@ func Rm(key string) {
 	bucket, ctx := Bucket()
 	err := bucket.Delete(ctx, key)
 	if err != nil {
-		println(err.Error())
+		existWithError(err)
+	}
+}
+
+func Sync(key string) {
+	var body *bytes.Buffer
+	if strings.HasSuffix(key, "/") {
+		key = strings.TrimRight(key, "/")
+		body = bytes.NewBufferString(fmt.Sprintf(`{"dirs": ["%s"]}`, key))
+	} else {
+		body = bytes.NewBufferString(fmt.Sprintf(`{"urls": ["%s"]}`, key))
+	}
+	request, _ := http.NewRequest("POST", "http://fusion.qiniuapi.com/refresh", body)
+	if token, err := mac.SignRequest(request, false); err != nil {
+		existWithError(err)
+	} else {
+		request.Header.Set("Content-Type", "application/json")
+		request.Header.Set("Authorization", "QBox "+token)
+		client := &http.Client{}
+		if resp, err := client.Do(request); err != nil {
+			existWithError(err)
+		} else {
+			defer resp.Body.Close()
+			var data struct {
+				Code int `json: "code"`
+			}
+			body, _ := ioutil.ReadAll(resp.Body)
+			if resp.StatusCode != 200 {
+				println(string(body))
+			} else if err = json.Unmarshal(body, &data); err != nil {
+				existWithError(err)
+			} else if data.Code != 200 {
+				println(string(body))
+			}
+		}
 	}
 }
 
@@ -108,4 +151,9 @@ func PrintListItem(i *kodo.ListItem) {
 
 func Bucket() (kodo.Bucket, context.Context) {
 	return client.Bucket(bucketName), context.Background()
+}
+
+func existWithError(err error) {
+	fmt.Errorf("%v", err)
+	os.Exit(1)
 }
