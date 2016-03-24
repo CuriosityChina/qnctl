@@ -37,8 +37,8 @@ func Operate(accessKey, secretKey, bucket string) {
 		Rm(args[1])
 	} else if op == "stat" && len(args) == 2 {
 		Stat(args[1])
-	} else if op == "sync" && len(args) == 2 {
-		Sync(args[1])
+	} else if op == "sync" && len(args) >= 2 {
+		Sync(args[1:])
 	} else {
 		HelpAndExit(1)
 	}
@@ -101,14 +101,9 @@ func Rm(key string) {
 	}
 }
 
-func Sync(key string) {
-	var body *bytes.Buffer
-	if strings.HasSuffix(key, "/") {
-		key = strings.TrimRight(key, "/")
-		body = bytes.NewBufferString(fmt.Sprintf(`{"dirs": ["%s"]}`, key))
-	} else {
-		body = bytes.NewBufferString(fmt.Sprintf(`{"urls": ["%s"]}`, key))
-	}
+func Sync(urls []string) {
+	marshal, _ := json.Marshal(urls)
+	body := bytes.NewBufferString(fmt.Sprintf(`{"urls": %s}`, marshal))
 	request, _ := http.NewRequest("POST", "http://fusion.qiniuapi.com/refresh", body)
 	if token, err := mac.SignRequest(request, false); err != nil {
 		existWithError(err)

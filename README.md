@@ -97,5 +97,5 @@ Mime Type: image/png
 Refresh CDN cache.
 
 ```
-$ qnctl sync http://your-domain.qiniudns.com/path
+$ qnctl sync http://your-domain.qiniudns.com/key1 http://your-domain.qiniudns.com/key2
 ```
