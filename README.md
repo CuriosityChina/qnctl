@@ -5,8 +5,9 @@ Built on the official library `qiniupkg.com/api.v7/kodo`, lightweight and friend
 Supported operations:
 + add
 + rm
-+ stat
 + ls
++ stat
++ sync
 
 ### Installation
 
@@ -75,7 +76,6 @@ $ qnctl ls images/
     326842  2016-01-27 03:06:16  images/001.png
     140797  2016-01-27 03:06:16  images/002.png
        983  2016-01-27 03:06:16  images/003.png
-EOF
 ```
 
 #### stat
@@ -90,4 +90,12 @@ $ qnctl stat images/001.png
 Mime Type: image/png
  Put Time: 2016-01-27 03:06:16 +0800 CST
  End User: 
+```
+
+### sync
+
+Refresh CDN cache.
+
+```
+$ qnctl sync http://your-domain.qiniudns.com/path
 ```
