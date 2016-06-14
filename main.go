@@ -17,7 +17,7 @@ func readConfig(path string) map[string]string {
 	err = json.Unmarshal(content, &result)
 	if err != nil {
 		println(err.Error())
-		os.Exit(1)
+		os.Exit(2)
 	}
 	return result
 }
@@ -41,7 +41,7 @@ func main() {
 	}
 
 	if accessKey == "" || secretKey == "" || bucket == "" || len(flag.Args()) == 0 {
-		HelpAndExit(1)
+		HelpAndExit(3)
 	} else {
 		Operate(accessKey, secretKey, bucket)
 	}
