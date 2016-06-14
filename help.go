@@ -3,7 +3,7 @@ package main
 import "os"
 
 func HelpAndExit(code int) {
-	println(`Version: 1.1.0
+	println(`Version: 1.1.1
 
 Usage:
     qnctl -c config.json -b <bucket> <operation> <args>
