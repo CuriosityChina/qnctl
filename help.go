@@ -1,9 +1,10 @@
 package main
 
+import "fmt"
 import "os"
 
 func HelpAndExit(code int) {
-	println(`Version: 1.1.1
+	fmt.Println(`Version: 1.2.0
 
 Usage:
     qnctl -c config.json -b <bucket> <operation> <args>
